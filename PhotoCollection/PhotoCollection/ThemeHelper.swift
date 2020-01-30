@@ -29,7 +29,7 @@ class ThemeHelper {
         UserDefaults.standard.set(themePreference, forKey: "" )
     }
     
-    func setThemePreferenceToYourColorHere() {
+    func setThemePreferenceToPink() {
         
     }
     
