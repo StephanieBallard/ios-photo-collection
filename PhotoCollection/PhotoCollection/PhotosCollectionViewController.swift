@@ -31,7 +31,15 @@ class PhotosCollectionViewController: UICollectionViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+//***********Implement the prepareForSegue. You should have three segues to handle.
+
+The segue from the cell should pass the themeHelper, photoController, and the photo.
+The segue from the "Add" bar button item should pass the the themeHelper and the photoController.
+The segue from the "Select Theme" bar button item should pass the themeHelper.
+
+     
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
@@ -61,7 +69,14 @@ class PhotosCollectionViewController: UICollectionViewController {
     
         return cell
     }
-
+    
+//*******Create a function called setTheme(). This function should:
+//Get the current themePreference from the themeHelper. Make sure that it has a value, or return out of the function.
+//Based on the value, change the collection view's background color depending on whether the theme is dark or the other color you selected.
+    func setTheme() {
+        
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*
