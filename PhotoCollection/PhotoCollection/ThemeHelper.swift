@@ -17,20 +17,29 @@
 import Foundation
 
 extension String {
-    static var themePreferenceKey = ""
+    static var themePreferenceKey = "themeHelper"
 }
 
 class ThemeHelper {
     
-    let themePreferenceKey: String
+    init() {
+        guard themePreference == nil
+            else { return }
+        
+        setThemePreferenceToDark()
+        
+    }
+    
+    var themePreference: String? {
+        return UserDefaults.standard.string(forKey: .themePreferenceKey)
+    }
     
     func setThemePreferenceToDark() {
-        let themePreference =
-        UserDefaults.standard.set(themePreference, forKey: "" )
+        UserDefaults.standard.set("dark", forKey: .themePreferenceKey )
     }
     
     func setThemePreferenceToPink() {
-        
+        UserDefaults.standard.set("pink", forKey: .themePreferenceKey )
     }
     
     

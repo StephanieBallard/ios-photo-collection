@@ -68,6 +68,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Photo Collection" id="9gm-Z0-wCj">
+                        <barButtonItem key="leftBarButtonItem" title="Select Theme" id="bSd-AM-zYi">
+                            <connections>
+                                <segue destination="f9C-jD-MpK" kind="presentation" identifier="ThemeModalSegue" modalPresentationStyle="fullScreen" id="HvB-9e-eHG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="oss-ll-7vL">
                             <connections>
                                 <segue destination="b3d-Yq-XDa" kind="show" identifier="ShowSegueAddButton" id="Lb2-Km-uBd"/>
@@ -145,17 +150,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="center" spacing="95" translatesAutoresizingMaskIntoConstraints="NO" id="UIl-hg-QbI">
-                                <rect key="frame" x="55" y="140" width="303" height="145.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="95" translatesAutoresizingMaskIntoConstraints="NO" id="UIl-hg-QbI">
+                                <rect key="frame" x="50" y="134" width="314" height="145.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select the Theme you would like to use:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nro-eb-r4Q">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="20.5"/>
+                                        <rect key="frame" x="5.5" y="0.0" width="303" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="153" translatesAutoresizingMaskIntoConstraints="NO" id="WqU-Jg-0ar">
-                                        <rect key="frame" x="43.5" y="115.5" width="216" height="30"/>
+                                        <rect key="frame" x="49" y="115.5" width="216" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="12N-IG-N6c">
                                                 <rect key="frame" x="0.0" y="0.0" width="33" height="30"/>
@@ -175,15 +180,20 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoi-kD-Zsr">
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="53V-Po-abX">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Title" id="QqS-Aq-IFK"/>
+                                    <navigationItem title="Title" id="ZEu-Uy-EX2"/>
                                 </items>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="UIl-hg-QbI" firstAttribute="top" secondItem="Y9f-LB-Eop" secondAttribute="top" constant="90" id="6ew-Nx-uJC"/>
+                            <constraint firstItem="Y9f-LB-Eop" firstAttribute="trailing" secondItem="UIl-hg-QbI" secondAttribute="trailing" constant="50" id="fXm-Ag-zLg"/>
+                            <constraint firstItem="UIl-hg-QbI" firstAttribute="leading" secondItem="Y9f-LB-Eop" secondAttribute="leading" constant="50" id="u5l-6V-LRe"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Y9f-LB-Eop"/>
                     </view>
                 </viewController>
