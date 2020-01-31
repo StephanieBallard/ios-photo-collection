@@ -20,10 +20,10 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
     
     func updateViews() {
-//        guard let planet = planet else { return }
-//
-//        planetImageView.image = planet.image
-//        nameLabel.text = planet.name
+        guard let photo = photo else { return }
+
+        imageView.image = UIImage(data: photo.imageData)
+        photoLabel.text = photo.title
         
     }
     

@@ -17,14 +17,22 @@ import Foundation
 class PhotoController {
     var photos:[Photo] = []
     
-    func create() {
-        let newPhoto = Photo(imageData: Data, title: String)
+    func create(imageData: Data, title: String) {
+        let newPhoto = Photo(imageData: imageData, title: title)
+        photos.append(newPhoto)
     }
     
-    func update() {
+    func update(photo: Photo, imageData: Data, title: String) {
+        guard let index = photos.firstIndex(of: photo) else { return }
+            var scratch = photo
+            scratch.imageData = imageData
+            scratch.title = title
+        
+        photos.remove(at: index)
+        photos.insert(scratch, at: index)
         
     }
-
+    
 }
 
 
