@@ -12,6 +12,7 @@ private let reuseIdentifier = "Cell"
 
 class PhotosCollectionViewController: UICollectionViewController {
     
+      //need one source for a class, pass it around to the other files. using segues to pass around to the different view controllers
     let photoController = PhotoController()
     let themeHelper = ThemeHelper()
     
@@ -39,14 +40,31 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     //Implement the prepareForSegue. You should have three segues to handle.
     
+    
+    
     //The segue from the cell should pass the themeHelper, photoController, and the photo.
     //The segue from the "Add" bar button item should pass the the themeHelper and the photoController.
     //The segue from the "Select Theme" bar button item should pass the themeHelper.
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case "ShowSegueAddButton":
+            guard let destintationViewController = segue.destination as? PhotoDetailViewController else { return }
+            destintationViewController.photoController = photoController
+            destintationViewController.themeHelper = themeHelper
+        case "ShowSegueCollectionViewCell":
+            guard let destinationViewController = segue.destination as? PhotoDetailViewController else { return }
+            guard let indexPath = collectionView.indexPathsForSelectedItems?.first else { return }
+            destinationViewController.photoController = photoController
+            destinationViewController.photo = photoController.photos[indexPath.item]
+            destinationViewController.themeHelper = themeHelper
+        case "ThemeModalSegue":
+            guard let destinationViewController = segue.destination as? ThemeSelectionViewController else { return }
+            destinationViewController.themeHelper = themeHelper
+        default:
+            break
+        }
     }
     
     

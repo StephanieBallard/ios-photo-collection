@@ -18,8 +18,9 @@
 //Note: Your PhotoDetailViewController will need to adopt both the UIImagePickerControllerDelegate and UINavigationControllerDelegate protocols and implement the didFinishPickingMediaWithInfo method to get the image the user selects, then dismiss the image picker.
 
 import UIKit
+import Photos //to access the user's photos
 
-class PhotoDetailViewController: UIViewController {
+class PhotoDetailViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textField: UITextField!
@@ -27,7 +28,6 @@ class PhotoDetailViewController: UIViewController {
     var photoController: PhotoController?
     var photo: Photo?
     var themeHelper: ThemeHelper?
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +37,54 @@ class PhotoDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    //need one source for a class, pass it around to the other files with var
+    //if we dont ask permission app will crash, apple requires we ask permission to access the user's photo lib
     @IBAction func addPhoto(_ sender: UIButton) {
+        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+        switch authorizationStatus {
+        case .authorized:
+            presentImagePickerController()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization { (status) in
+                guard status == .authorized else {
+                    NSLog("User did not authorize access to photo library"); return
+                }
+                self.presentImagePickerController()
+            }
+        default:
+            break
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        
+        guard let image = info[.originalImage] as? UIImage else { return }
+        imageView.image = image
+    }
+    
+    func presentImagePickerController() {
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else { return }
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func savePhoto(_ sender: UIBarButtonItem) {
+        
+        guard let image = imageView.image,
+            let imageData = image.pngData(),
+                let title = textField.text else { return }
+        
+        if let photo = photo {
+            photoController?.update(photo: photo, imageData: photo.imageData, title: photo.title)
+        } else {
+            photoController?.create(imageData: imageData, title: title)
+        }
+        
+        navigationController?.popViewController(animated: true)
+        //pop view to last controller and pop to root is to initial view controller
     }
     
     func updateViews() {
@@ -68,7 +111,6 @@ class PhotoDetailViewController: UIViewController {
         view.backgroundColor = backgroundColor
         
     }
-    
     
     
     /*
